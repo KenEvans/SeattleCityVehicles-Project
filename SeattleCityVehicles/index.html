@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <title>NodeOrders 500</title>
+    <link rel="stylesheet" type="text/css" href="Content/Site.css">
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap-theme.min.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="Scripts/App1.js"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="box1">
+            <h3>Which Stores Are Selling CDs For A Better Markup? (Price more than $13)</h3>
+            <br />
+            <input type="button" value="Get Markups" class="btn btn-primary" onclick="GetMarkups();" />
+            <br /><br />
+            <h4>Here's the list of stores along with the number of orders over $13:</h4>
+            <br />
+            <ul id="markup" class="list-group" /> <br />
+        </div>
+
+        <div class="box2">
+            <h3>Check The Performance of an Employee.</h3>
+            <h4>Total Amout Sold By Each Salesperson Annually:</h4>
+            <label for="chooseEmployee">Choose An Employee</label>
+            <select name="chooseEmployee" id="chooseEmployee"></select> <br />
+            <input type="button" value="GetEmp" class="btn btn-primary" onclick="GetAnnualSales()" />
+            <br /><br />
+            <p id="getEmpSales"></p> <br />
+        </div>
+
+        <div class="box3">
+            <h3>Performance Of Each Store.</h3>
+            <label for="chooseStore">Choose A Store</label>
+            <select name="chooseStore" id="chooseStore">
+            </select> <br />
+            <input type="button" value="GetSore" class="btn btn-primary" onclick="GetStoreSales();" />
+            <br /><br />
+            <p id="storeSales"></p>
+        </div>
+    </div>
+</body>
+</html>

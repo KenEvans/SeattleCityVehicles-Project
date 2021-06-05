@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SeattleCityVehiclesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Active_PHEVs">
+          <Key>
+            <PropertyRef Name="ActivePHEVKey" />
+          </Key>
+          <Property Name="ActivePHEVKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Make" Type="int" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department" Type="int" Nullable="false" />
+          <Property Name="InServiceDate" Type="date" Nullable="false" />
+          <Property Name="EstReplacementYear" Type="int" Nullable="false" />
+          <Property Name="EquipmentType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InServiceCost" Type="money" Nullable="false" />
+          <Property Name="FuelType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepartmentName">
+          <Key>
+            <PropertyRef Name="DeptPrimaryKey" />
+          </Key>
+          <Property Name="DeptPrimaryKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeptName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FuelType">
+          <Key>
+            <PropertyRef Name="FuelTypeKey" />
+          </Key>
+          <Property Name="FuelTypeKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FuelType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sold_Fleet_Equipment">
+          <Key>
+            <PropertyRef Name="SoldFleetKey" />
+          </Key>
+          <Property Name="SoldFleetKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Make" Type="int" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department" Type="int" Nullable="false" />
+          <Property Name="SalePrice" Type="money" Nullable="false" />
+          <Property Name="SaleDate" Type="date" Nullable="false" />
+          <Property Name="EquipmentType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FuelType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VehicleMake">
+          <Key>
+            <PropertyRef Name="VehicleMakeKey" />
+          </Key>
+          <Property Name="VehicleMakeKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleMake" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Active_PHEVs_DepartmentName">
+          <End Role="DepartmentName" Type="Self.DepartmentName" Multiplicity="1" />
+          <End Role="Active_PHEVs" Type="Self.Active_PHEVs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentName">
+              <PropertyRef Name="DeptPrimaryKey" />
+            </Principal>
+            <Dependent Role="Active_PHEVs">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_PHEVs_FuelType">
+          <End Role="FuelType" Type="Self.FuelType" Multiplicity="1" />
+          <End Role="Active_PHEVs" Type="Self.Active_PHEVs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FuelType">
+              <PropertyRef Name="FuelTypeKey" />
+            </Principal>
+            <Dependent Role="Active_PHEVs">
+              <PropertyRef Name="FuelType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_PHEVs_VehicleMake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="1" />
+          <End Role="Active_PHEVs" Type="Self.Active_PHEVs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeKey" />
+            </Principal>
+            <Dependent Role="Active_PHEVs">
+              <PropertyRef Name="Make" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sold_Fleet_Equipment_DepartmentName">
+          <End Role="DepartmentName" Type="Self.DepartmentName" Multiplicity="1" />
+          <End Role="Sold_Fleet_Equipment" Type="Self.Sold_Fleet_Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentName">
+              <PropertyRef Name="DeptPrimaryKey" />
+            </Principal>
+            <Dependent Role="Sold_Fleet_Equipment">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sold_Fleet_Equipment_FuelType">
+          <End Role="FuelType" Type="Self.FuelType" Multiplicity="1" />
+          <End Role="Sold_Fleet_Equipment" Type="Self.Sold_Fleet_Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FuelType">
+              <PropertyRef Name="FuelTypeKey" />
+            </Principal>
+            <Dependent Role="Sold_Fleet_Equipment">
+              <PropertyRef Name="FuelType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sold_Fleet_Equipment_VehicleMake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="1" />
+          <End Role="Sold_Fleet_Equipment" Type="Self.Sold_Fleet_Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeKey" />
+            </Principal>
+            <Dependent Role="Sold_Fleet_Equipment">
+              <PropertyRef Name="Make" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeattleCityVehiclesModelStoreContainer">
+          <EntitySet Name="Active_PHEVs" EntityType="Self.Active_PHEVs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepartmentName" EntityType="Self.DepartmentName" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FuelType" EntityType="Self.FuelType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sold_Fleet_Equipment" EntityType="Self.Sold_Fleet_Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleMake" EntityType="Self.VehicleMake" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Active_PHEVs_DepartmentName" Association="Self.FK_Active_PHEVs_DepartmentName">
+            <End Role="DepartmentName" EntitySet="DepartmentName" />
+            <End Role="Active_PHEVs" EntitySet="Active_PHEVs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_PHEVs_FuelType" Association="Self.FK_Active_PHEVs_FuelType">
+            <End Role="FuelType" EntitySet="FuelType" />
+            <End Role="Active_PHEVs" EntitySet="Active_PHEVs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_PHEVs_VehicleMake" Association="Self.FK_Active_PHEVs_VehicleMake">
+            <End Role="VehicleMake" EntitySet="VehicleMake" />
+            <End Role="Active_PHEVs" EntitySet="Active_PHEVs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sold_Fleet_Equipment_DepartmentName" Association="Self.FK_Sold_Fleet_Equipment_DepartmentName">
+            <End Role="DepartmentName" EntitySet="DepartmentName" />
+            <End Role="Sold_Fleet_Equipment" EntitySet="Sold_Fleet_Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sold_Fleet_Equipment_FuelType" Association="Self.FK_Sold_Fleet_Equipment_FuelType">
+            <End Role="FuelType" EntitySet="FuelType" />
+            <End Role="Sold_Fleet_Equipment" EntitySet="Sold_Fleet_Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sold_Fleet_Equipment_VehicleMake" Association="Self.FK_Sold_Fleet_Equipment_VehicleMake">
+            <End Role="VehicleMake" EntitySet="VehicleMake" />
+            <End Role="Sold_Fleet_Equipment" EntitySet="Sold_Fleet_Equipment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SeattleCityVehiclesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Active_PHEVs">
+          <Key>
+            <PropertyRef Name="ActivePHEVKey" />
+          </Key>
+          <Property Name="ActivePHEVKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Make" Type="Int32" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Department" Type="Int32" Nullable="false" />
+          <Property Name="InServiceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EstReplacementYear" Type="Int32" Nullable="false" />
+          <Property Name="EquipmentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InServiceCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="FuelType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DepartmentName" Relationship="Self.FK_Active_PHEVs_DepartmentName" FromRole="Active_PHEVs" ToRole="DepartmentName" />
+          <NavigationProperty Name="FuelType1" Relationship="Self.FK_Active_PHEVs_FuelType" FromRole="Active_PHEVs" ToRole="FuelType" />
+          <NavigationProperty Name="VehicleMake" Relationship="Self.FK_Active_PHEVs_VehicleMake" FromRole="Active_PHEVs" ToRole="VehicleMake" />
+        </EntityType>
+        <EntityType Name="DepartmentName">
+          <Key>
+            <PropertyRef Name="DeptPrimaryKey" />
+          </Key>
+          <Property Name="DeptPrimaryKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Active_PHEVs" Relationship="Self.FK_Active_PHEVs_DepartmentName" FromRole="DepartmentName" ToRole="Active_PHEVs" />
+          <NavigationProperty Name="Sold_Fleet_Equipment" Relationship="Self.FK_Sold_Fleet_Equipment_DepartmentName" FromRole="DepartmentName" ToRole="Sold_Fleet_Equipment" />
+        </EntityType>
+        <EntityType Name="FuelType">
+          <Key>
+            <PropertyRef Name="FuelTypeKey" />
+          </Key>
+          <Property Name="FuelTypeKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FuelType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Active_PHEVs" Relationship="Self.FK_Active_PHEVs_FuelType" FromRole="FuelType" ToRole="Active_PHEVs" />
+          <NavigationProperty Name="Sold_Fleet_Equipment" Relationship="Self.FK_Sold_Fleet_Equipment_FuelType" FromRole="FuelType" ToRole="Sold_Fleet_Equipment" />
+        </EntityType>
+        <EntityType Name="Sold_Fleet_Equipment">
+          <Key>
+            <PropertyRef Name="SoldFleetKey" />
+          </Key>
+          <Property Name="SoldFleetKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Make" Type="Int32" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Department" Type="Int32" Nullable="false" />
+          <Property Name="SalePrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="SaleDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EquipmentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FuelType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DepartmentName" Relationship="Self.FK_Sold_Fleet_Equipment_DepartmentName" FromRole="Sold_Fleet_Equipment" ToRole="DepartmentName" />
+          <NavigationProperty Name="FuelType1" Relationship="Self.FK_Sold_Fleet_Equipment_FuelType" FromRole="Sold_Fleet_Equipment" ToRole="FuelType" />
+          <NavigationProperty Name="VehicleMake" Relationship="Self.FK_Sold_Fleet_Equipment_VehicleMake" FromRole="Sold_Fleet_Equipment" ToRole="VehicleMake" />
+        </EntityType>
+        <EntityType Name="VehicleMake">
+          <Key>
+            <PropertyRef Name="VehicleMakeKey" />
+          </Key>
+          <Property Name="VehicleMakeKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleMake1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Active_PHEVs" Relationship="Self.FK_Active_PHEVs_VehicleMake" FromRole="VehicleMake" ToRole="Active_PHEVs" />
+          <NavigationProperty Name="Sold_Fleet_Equipment" Relationship="Self.FK_Sold_Fleet_Equipment_VehicleMake" FromRole="VehicleMake" ToRole="Sold_Fleet_Equipment" />
+        </EntityType>
+        <Association Name="FK_Active_PHEVs_DepartmentName">
+          <End Role="DepartmentName" Type="Self.DepartmentName" Multiplicity="1" />
+          <End Role="Active_PHEVs" Type="Self.Active_PHEVs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentName">
+              <PropertyRef Name="DeptPrimaryKey" />
+            </Principal>
+            <Dependent Role="Active_PHEVs">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_PHEVs_FuelType">
+          <End Role="FuelType" Type="Self.FuelType" Multiplicity="1" />
+          <End Role="Active_PHEVs" Type="Self.Active_PHEVs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FuelType">
+              <PropertyRef Name="FuelTypeKey" />
+            </Principal>
+            <Dependent Role="Active_PHEVs">
+              <PropertyRef Name="FuelType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_PHEVs_VehicleMake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="1" />
+          <End Role="Active_PHEVs" Type="Self.Active_PHEVs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeKey" />
+            </Principal>
+            <Dependent Role="Active_PHEVs">
+              <PropertyRef Name="Make" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sold_Fleet_Equipment_DepartmentName">
+          <End Role="DepartmentName" Type="Self.DepartmentName" Multiplicity="1" />
+          <End Role="Sold_Fleet_Equipment" Type="Self.Sold_Fleet_Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentName">
+              <PropertyRef Name="DeptPrimaryKey" />
+            </Principal>
+            <Dependent Role="Sold_Fleet_Equipment">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sold_Fleet_Equipment_FuelType">
+          <End Role="FuelType" Type="Self.FuelType" Multiplicity="1" />
+          <End Role="Sold_Fleet_Equipment" Type="Self.Sold_Fleet_Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FuelType">
+              <PropertyRef Name="FuelTypeKey" />
+            </Principal>
+            <Dependent Role="Sold_Fleet_Equipment">
+              <PropertyRef Name="FuelType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sold_Fleet_Equipment_VehicleMake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="1" />
+          <End Role="Sold_Fleet_Equipment" Type="Self.Sold_Fleet_Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="VehicleMakeKey" />
+            </Principal>
+            <Dependent Role="Sold_Fleet_Equipment">
+              <PropertyRef Name="Make" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeattleCityVehiclesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Active_PHEVs" EntityType="Self.Active_PHEVs" />
+          <EntitySet Name="DepartmentNames" EntityType="Self.DepartmentName" />
+          <EntitySet Name="FuelTypes" EntityType="Self.FuelType" />
+          <EntitySet Name="Sold_Fleet_Equipment" EntityType="Self.Sold_Fleet_Equipment" />
+          <EntitySet Name="VehicleMakes" EntityType="Self.VehicleMake" />
+          <AssociationSet Name="FK_Active_PHEVs_DepartmentName" Association="Self.FK_Active_PHEVs_DepartmentName">
+            <End Role="DepartmentName" EntitySet="DepartmentNames" />
+            <End Role="Active_PHEVs" EntitySet="Active_PHEVs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_PHEVs_FuelType" Association="Self.FK_Active_PHEVs_FuelType">
+            <End Role="FuelType" EntitySet="FuelTypes" />
+            <End Role="Active_PHEVs" EntitySet="Active_PHEVs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_PHEVs_VehicleMake" Association="Self.FK_Active_PHEVs_VehicleMake">
+            <End Role="VehicleMake" EntitySet="VehicleMakes" />
+            <End Role="Active_PHEVs" EntitySet="Active_PHEVs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sold_Fleet_Equipment_DepartmentName" Association="Self.FK_Sold_Fleet_Equipment_DepartmentName">
+            <End Role="DepartmentName" EntitySet="DepartmentNames" />
+            <End Role="Sold_Fleet_Equipment" EntitySet="Sold_Fleet_Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sold_Fleet_Equipment_FuelType" Association="Self.FK_Sold_Fleet_Equipment_FuelType">
+            <End Role="FuelType" EntitySet="FuelTypes" />
+            <End Role="Sold_Fleet_Equipment" EntitySet="Sold_Fleet_Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sold_Fleet_Equipment_VehicleMake" Association="Self.FK_Sold_Fleet_Equipment_VehicleMake">
+            <End Role="VehicleMake" EntitySet="VehicleMakes" />
+            <End Role="Sold_Fleet_Equipment" EntitySet="Sold_Fleet_Equipment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SeattleCityVehiclesModelStoreContainer" CdmEntityContainer="SeattleCityVehiclesEntities">
+          <EntitySetMapping Name="Active_PHEVs">
+            <EntityTypeMapping TypeName="SeattleCityVehiclesModel.Active_PHEVs">
+              <MappingFragment StoreEntitySet="Active_PHEVs">
+                <ScalarProperty Name="ActivePHEVKey" ColumnName="ActivePHEVKey" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="InServiceDate" ColumnName="InServiceDate" />
+                <ScalarProperty Name="EstReplacementYear" ColumnName="EstReplacementYear" />
+                <ScalarProperty Name="EquipmentType" ColumnName="EquipmentType" />
+                <ScalarProperty Name="InServiceCost" ColumnName="InServiceCost" />
+                <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentNames">
+            <EntityTypeMapping TypeName="SeattleCityVehiclesModel.DepartmentName">
+              <MappingFragment StoreEntitySet="DepartmentName">
+                <ScalarProperty Name="DeptPrimaryKey" ColumnName="DeptPrimaryKey" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FuelTypes">
+            <EntityTypeMapping TypeName="SeattleCityVehiclesModel.FuelType">
+              <MappingFragment StoreEntitySet="FuelType">
+                <ScalarProperty Name="FuelTypeKey" ColumnName="FuelTypeKey" />
+                <ScalarProperty Name="FuelType1" ColumnName="FuelType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sold_Fleet_Equipment">
+            <EntityTypeMapping TypeName="SeattleCityVehiclesModel.Sold_Fleet_Equipment">
+              <MappingFragment StoreEntitySet="Sold_Fleet_Equipment">
+                <ScalarProperty Name="SoldFleetKey" ColumnName="SoldFleetKey" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="EquipmentType" ColumnName="EquipmentType" />
+                <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleMakes">
+            <EntityTypeMapping TypeName="SeattleCityVehiclesModel.VehicleMake">
+              <MappingFragment StoreEntitySet="VehicleMake">
+                <ScalarProperty Name="VehicleMakeKey" ColumnName="VehicleMakeKey" />
+                <ScalarProperty Name="VehicleMake1" ColumnName="VehicleMake" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
