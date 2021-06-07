@@ -9,13 +9,17 @@ $(document).ready(function () {
 function GetDeptValues() {
     let onFocus = document.getElementById("chooseDepartment");
     let departmentName = onFocus.options[onFocus.selectedIndex].value;
+    let dollarUS = Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+    });
 
     // Send an AJAX request
     $.getJSON('api/DeptSoldPurchValues?deptName=' + departmentName)
         .done(function (data) {
             console.log(data);
-            document.getElementById("values").innerText = "Department, " + departmentName + ", sold $" + data[0] + " worth of vehicles." +
-                "\nDepartment, " + departmentName + ", purchased $" + data[1] + " worth of PHEV vehicles.";
+            document.getElementById("values").innerText = "The department, " + departmentName + ", sold fleet vehicles worth:  " + dollarUS.format(data[0]) + 
+                "\n\nThe " + departmentName + " purchased PHEV vehicles worth:  " + dollarUS.format(data[1]);
         });
 }
 
