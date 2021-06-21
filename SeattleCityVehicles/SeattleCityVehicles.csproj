@@ -8,7 +8,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5FC54AD0-66ED-4E1F-A689-2436BED42E9E}</ProjectGuid>
+    <ProjectGuid>{4AE12E26-E1C1-413F-96FD-82626D6D00CB}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -18,7 +18,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44341</IISExpressSSLPort>
+    <IISExpressSSLPort>44326</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -131,7 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Active_PHEVs.cs">
-      <DependentUpon>SeattleCityVehiclesModel.tt</DependentUpon>
+      <DependentUpon>SeattleCityVehiclesData.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -165,38 +165,42 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\DepartmentNamesController.cs" />
-    <Compile Include="Controllers\DeptSoldPurchValuesController.cs" />
+    <Compile Include="Controllers\GetEquipmentFromFuelController.cs" />
+    <Compile Include="Controllers\GetEquipmentFromPhevController.cs" />
+    <Compile Include="Controllers\GetManufacturerController.cs" />
+    <Compile Include="Controllers\GetModelFromMakerController.cs" />
+    <Compile Include="Controllers\GetModelFromPhevController.cs" />
+    <Compile Include="Controllers\GetTypeOfFuelController.cs" />
     <Compile Include="DepartmentName.cs">
-      <DependentUpon>SeattleCityVehiclesModel.tt</DependentUpon>
+      <DependentUpon>SeattleCityVehiclesData.tt</DependentUpon>
     </Compile>
     <Compile Include="FuelType.cs">
-      <DependentUpon>SeattleCityVehiclesModel.tt</DependentUpon>
+      <DependentUpon>SeattleCityVehiclesData.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeattleCityVehiclesModel.Context.cs">
+    <Compile Include="SeattleCityVehiclesData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SeattleCityVehiclesModel.Context.tt</DependentUpon>
+      <DependentUpon>SeattleCityVehiclesData.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="SeattleCityVehiclesModel.cs">
+    <Compile Include="SeattleCityVehiclesData.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SeattleCityVehiclesModel.tt</DependentUpon>
+      <DependentUpon>SeattleCityVehiclesData.tt</DependentUpon>
     </Compile>
-    <Compile Include="SeattleCityVehiclesModel.Designer.cs">
+    <Compile Include="SeattleCityVehiclesData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SeattleCityVehiclesModel.edmx</DependentUpon>
+      <DependentUpon>SeattleCityVehiclesData.edmx</DependentUpon>
     </Compile>
     <Compile Include="Sold_Fleet_Equipment.cs">
-      <DependentUpon>SeattleCityVehiclesModel.tt</DependentUpon>
+      <DependentUpon>SeattleCityVehiclesData.tt</DependentUpon>
     </Compile>
     <Compile Include="VehicleMake.cs">
-      <DependentUpon>SeattleCityVehiclesModel.tt</DependentUpon>
+      <DependentUpon>SeattleCityVehiclesData.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -209,7 +213,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
-    <Content Include="Scripts\App1.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -236,16 +239,17 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\App.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="SeattleCityVehiclesModel.Context.tt">
+    <Content Include="SeattleCityVehiclesData.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SeattleCityVehiclesModel.Context.cs</LastGenOutput>
-      <DependentUpon>SeattleCityVehiclesModel.edmx</DependentUpon>
+      <LastGenOutput>SeattleCityVehiclesData.Context.cs</LastGenOutput>
+      <DependentUpon>SeattleCityVehiclesData.edmx</DependentUpon>
     </Content>
-    <Content Include="SeattleCityVehiclesModel.tt">
+    <Content Include="SeattleCityVehiclesData.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SeattleCityVehiclesModel.edmx</DependentUpon>
-      <LastGenOutput>SeattleCityVehiclesModel.cs</LastGenOutput>
+      <DependentUpon>SeattleCityVehiclesData.edmx</DependentUpon>
+      <LastGenOutput>SeattleCityVehiclesData.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -258,20 +262,20 @@
     <Content Include="Content\Site.css" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <EntityDeploy Include="SeattleCityVehiclesModel.edmx">
+    <EntityDeploy Include="SeattleCityVehiclesData.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SeattleCityVehiclesModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>SeattleCityVehiclesData.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="SeattleCityVehiclesModel.edmx.diagram">
-      <DependentUpon>SeattleCityVehiclesModel.edmx</DependentUpon>
+    <Content Include="SeattleCityVehiclesData.edmx.diagram">
+      <DependentUpon>SeattleCityVehiclesData.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Departments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -321,9 +325,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>10165</DevelopmentServerPort>
+          <DevelopmentServerPort>61047</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44341/</IISUrl>
+          <IISUrl>https://localhost:44326/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
