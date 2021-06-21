@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0e49317811554de9a5ffaa86f3b06df6" Name="Diagram1">
+      <Diagram DiagramId="40c12c04fbf34a8fadc169005820147e" Name="Diagram1">
         <EntityTypeShape EntityType="SeattleCityVehiclesModel.Active_PHEVs" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeattleCityVehiclesModel.DepartmentName" Width="1.5" PointX="6.375" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeattleCityVehiclesModel.FuelType" Width="1.5" PointX="6.375" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeattleCityVehiclesModel.Sold_Fleet_Equipment" Width="1.5" PointX="10.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeattleCityVehiclesModel.VehicleMake" Width="1.5" PointX="6.375" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeattleCityVehiclesModel.DepartmentName" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeattleCityVehiclesModel.FuelType" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeattleCityVehiclesModel.Sold_Fleet_Equipment" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeattleCityVehiclesModel.VehicleMake" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
         <AssociationConnector Association="SeattleCityVehiclesModel.FK_Active_PHEVs_DepartmentName" ManuallyRouted="false" />
         <AssociationConnector Association="SeattleCityVehiclesModel.FK_Active_PHEVs_FuelType" ManuallyRouted="false" />
         <AssociationConnector Association="SeattleCityVehiclesModel.FK_Active_PHEVs_VehicleMake" ManuallyRouted="false" />
