@@ -1,7 +1,9 @@
 ﻿
 $(document).ready(function () {
     GetDepartmentNames();
-    //GetStores();
+    // creates drop down list for Car and Manufacturers on load
+    GetTypeOfCarData();
+    GetManufacturerData();
 });
 
 
@@ -18,7 +20,7 @@ function GetDeptValues() {
     $.getJSON('api/DeptSoldPurchValues?deptName=' + departmentName)
         .done(function (data) {
             console.log(data);
-            document.getElementById("values").innerText = "The department, " + departmentName + ", sold fleet vehicles worth:  " + dollarUS.format(data[0]) + 
+            document.getElementById("values").innerText = "The dept, " + departmentName + ", sold fleet vehicles worth:  " + dollarUS.format(data[0]) + 
                 "\n\nThe " + departmentName + " purchased PHEV vehicles worth:  " + dollarUS.format(data[1]);
         });
 }
@@ -36,69 +38,78 @@ function GetDepartmentNames() {
 }
 
 
-//// Written by Ken Evans
-//function GetMarkups() {
-//    // Send an AJAX request
-//    $.get('api/Markups')
-//        .done(function (data) {
-//            $('#markup').empty();
-//            console.log(data);
-//            $.each(data, function (key, item) {
-//                $('<li>', { text: formatItem(item) }).appendTo($('#markup'));
-//            });
-//        });
-//}
+//Written by Dylan York
+function GetTypeOfCarData() {
+    // Send an AJAX request
+    $.getJSON('api/GetTypeOfFuel')
+        .done(function (data) {
+            $.each(data, function (key, item) {
+                // adds option for each fuel type
+                $('<option>', { text: item, value: item }).appendTo($('#tcID'));
+            });
+        });
+}
 
 
-////Written by Ken Evans
-//function formatItem(item) {
-//    return 'City: ' + item.City + ', Count: ' + item.Count;
-//}
+//Written by Dylan York
+function GetManufacturerData() {
+    // Send an AJAX request
+    $.getJSON('api/GetManufacturer')
+        .done(function (data) {
+            $.each(data, function (key, item) {
+                $('<option>', { text: item, value: item }).appendTo($('#mID'));
+            });
+        });
+}
 
 
-//function GetSalesPeople() {
-//    // Send an AJAX request
-//    $.getJSON("api/SalesPeople")
-//        .done(function (data) {
-//            $.each(data, function (key, item) {
-//                $('<option>', { text: item, value: item }).appendTo($('#chooseEmployee'));
-//            });
-//        });
-//}
+//Written by Dylan York
+function getModelData() {
+    let onFocus = document.getElementById("mID");
+    let modelName = onFocus.options[onFocus.selectedIndex].value;
+
+    $('#modeldetails').empty();
+    $.getJSON('api/GetModelFromMaker?id=' + modelName)
+        .done(function (data) {
+            console.log(data);
+            $('#Model').text("Car Type:")
+            $.each(data, function (key, item) {
+                $('<li>', { text: item.Model, value: item.Model }).appendTo($('#modeldetails'));
+            })
+
+        });
+    $.getJSON('api/GetModelFromPhev?id=' + modelName)
+        .done(function (data) {
+            console.log(data);
+            $.each(data, function (key, item) {
+                $('<li>', { text: item.Model, value: item.Model }).appendTo($('#modeldetails'));
+            })
+
+        });
+}
 
 
-//function GetStores() {
-    //// Send an AJAX request
-    //$.getJSON("api/Stores")
-    //    .done(function (data) {
-    //        $.each(data, function (key, item) {
-    //            $('<option>', { text: item, value: item }).appendTo($('#chooseStore'));
-    //        });
-    //    });
-//}
+//Written by Dylan York
+function getEquipmentData() {
+    let onFocus = document.getElementById("tcID");
+    let fuelName = onFocus.options[onFocus.selectedIndex].value;
+
+    $('#CarCost').empty();
+    $.getJSON('api/GetEquipmentFromFuel?id=' + fuelName)
+        .done(function (data) {
+            console.log(data);
+            $('#Title').text("Equipment Type:")
+            $.each(data, function (key, item) {
+                $('<li>', { text: item.EquipmentType, value: item.EquipmentType }).appendTo($('#CarCost'));
+            })
 
 
-//function GetAnnualSales() {
-    //let onFocus = document.getElementById("chooseEmployee");
-    //let employeeName = onFocus.options[onFocus.selectedIndex].value;
-
-    //// Send an AJAX request
-    //$.getJSON('api/AnnualSales?salesPeople=' + employeeName)
-    //    .done(function (data) {
-    //        console.log(data);
-    //        document.getElementById("getEmpSales").innerText = "This employee sold $" + data + " for the year";
-    //    });
-//}
-
-
-//function GetStoreSales() {
-    //let onFocus = document.getElementById("chooseStore");
-    //let storeName = onFocus.options[onFocus.selectedIndex].value;
-
-    //// Send an AJAX request
-    //$.getJSON("api/StoreSales?storeCity=" + storeName)
-    //    .done(function (data) {
-    //        console.log(data);
-    //        document.getElementById("storeSales").innerText = "That store sold $" + data + " for the year";
-    //    });
-//}
+        });
+    $.getJSON('api/GetEquipmentFromPhev?id=' + fuelName)
+        .done(function (data) {
+            console.log(data);
+            $.each(data, function (key, item) {
+                $('<li>', { text: item.EquipmentType, value: item.EquipmentType }).appendTo($('#CarCost'));
+            })
+        })
+}

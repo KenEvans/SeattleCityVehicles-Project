@@ -15,38 +15,43 @@
     <div class="wrapper">
 
         <div class="box1">
-            <h3>See the value of vehicles sold versus the value of PHEV vehicles purchased by department.</h3>
+            <h2>Are City Departments Becoming More Fuel Efficient</h2>
+            <h3>Select a Department to see the value of vehicles sold versus the value of PHEV vehicles purchased</h3>
             <br />
             <label for="chooseDepartment">Choose A Department</label>
             <select name="chooseDepartment" id="chooseDepartment"></select>
             <br /><br />
             <input type="button" value="Get Values" class="btn btn-primary" onclick="GetDeptValues();" />
             <br /><br />
-                  <h4>Here's the value of vehicles sold versus the value of PHEV vehicles purchased:</h4>
+            <h4>Here's the value of vehicles sold versus the value of PHEV vehicles purchased:</h4>
             <br />
             <h4 id="values"></h4>
             <br />
         </div>
 
-        <!--<div class="box2">
-            <h3>Check The Performance of an Employee.</h3>
-            <h4>Total Amout Sold By Each Salesperson Annually:</h4>
-            <label for="chooseEmployee">Choose An Employee</label>
-            <select name="chooseEmployee" id="chooseEmployee"></select> <br />
-            <input type="button" value="GetEmp" class="btn btn-primary" onclick="GetAnnualSales()" />
-            <br /><br />
-            <p id="getEmpSales"></p> <br />
+        <div class="box2">
+            <h2>What Fuel Powers What Equipment in Seattle</h2>
+            <h3>Select type of Fuel to see Equipment type</h3>
+            <br />
+            <label for="typeofcar">Select a car:</label>
+            <select name="typeofcar" id="tcID"></select>
+            <button id="getEquipmentType" class="btn btn-primary" onclick="getEquipmentData();">Get Equipment Type of Car</button>
+            <p id="Title"></p>
+            <ul id="CarCost">
+            </ul>
         </div>
 
         <div class="box3">
-            <h3>Performance Of Each Store.</h3>
-            <label for="chooseStore">Choose A Store</label>
-            <select name="chooseStore" id="chooseStore">
-            </select> <br />
-            <input type="button" value="GetSore" class="btn btn-primary" onclick="GetStoreSales();" />
-            <br /><br />
-            <p id="storeSales"></p>
-        </div>-->
+            <h2>Type of Car by Manufacturer</h2>
+            <h3>Select a Manufacturer to show the type of car they made for the City of Seattle</h3>
+            <br />
+            <label for="Maker">Select a Manufacturer:</label>
+            <select name="Maker" id="mID"></select>
+            <button id="getModelData" class="btn btn-primary" onclick="getModelData();">Get Type of Car</button>
+            <p id="Model"></p>
+            <ul id="modeldetails">
+            </ul>
+        </div>
     </div>
 </body>
 </html>
